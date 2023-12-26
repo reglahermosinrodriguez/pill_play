@@ -1,0 +1,84 @@
+html {
+    font-family: Rubik Doodle Shadow;
+}
+body {
+    background-color: var(--background);
+    display: flex;
+    padding: 2rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.box-name {
+    background-color: var(--primary);
+    margin-right: 10rem;
+    height: 20rem;
+    width: 35rem;
+    display: flex;
+    display: block;
+    flex-direction: column; /* Alinea los elementos en columna */
+    justify-content: space-around; /* Espacio uniforme entre los elementos */
+    
+}
+
+h1 {
+    padding: 2rem;
+    text-align: center;
+}
+
+#username {
+    font-size: medium;
+    margin-left: -0.5rem;
+    border-color: var(--background);
+    border-width: 0.5rem;
+    font-family: Roboto Mono;
+    
+}
+
+.box-score {
+    background-color: var(--secondary);
+    height: 20rem;
+    width: 10rem;
+    text-align: center;
+    
+        
+}
+
+/*.container {
+    display: flex;
+    width: 20rem;
+    padding: 10rem;
+
+}*/
+
+.user-data {
+    width: 8rem; /* Ancho del botón */
+    margin-bottom: 10rem;
+    margin-left: 11rem;
+}
+
+.start-button {
+    width: 15rem; /* Ancho del botón */
+    margin: 1rem auto; /* Alineación horizontal y margen */
+    margin-top: 2.5rem;
+    margin-left: -1rem;
+    padding: 2rem;
+    border-radius: 1rem;
+    border: none;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-family: Roboto Mono;
+    font-weight: 600;
+    font-size: 1rem; 
+    cursor: pointer;
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1);
+    
+    
+}
+
+.start-button:hover {
+    background-color: var(--accent);
+    
+}
+
+
+
