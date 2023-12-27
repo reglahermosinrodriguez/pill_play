@@ -1,36 +1,45 @@
-// Obtener elementos del DOM
+/* Llamar al DOM */
+document.addEventListener('DOMContentLoaded', function() {
 const startButton = document.querySelector('.start-button');
-const userScore = document.querySelector('.box-score');
+const clicksDisplay = document.getElementById('clicksDisplay');
+const usernameInput = document.getElementById('username');
+const gameArea = document.getElementById('gameArea');
+const clickHereButton = document.getElementById('clickButton');
 
-let gameStarted = false;
-let score = 0;
+let timer; // Variable para almacenar el temporizador
+let clicks = 0;
 
-// Función para manejar el clic en el botón de inicio
-startButton.addEventListener('click', () => {
-  if (!gameStarted) {
-    gameStarted = true;
-    score = 0;
-    userScore.textContent = 'User Score: 0';
+startButton.addEventListener('click', startGame);
+clickHereButton.addEventListener('click', countClick);
 
-    // Comienza el juego durante 10 segundos
-    setTimeout(() => {
-      gameStarted = false;
-      alert(`Game over! Your score: ${score}`);
 
-      // Almacena el resultado en localStorage si es mejor que el anterior
-      const prevScore = localStorage.getItem('userScore');
-      if (!prevScore || score > parseInt(prevScore)) {
-        localStorage.setItem('userScore', score);
-        userScore.textContent = `User Score: ${score} (New High Score!)`;
-      }
-    }, 10000); // 10 segundos
+function startGame() {
+    startButton.style.display = 'none';
+    clicksDisplay.style.display = 'block';
+    clickHereButton.style.display = 'block';
+    gameArea.style.display = 'block';
+    clicks = 0;
+    clicksDisplay.textContent = clicks;
 
-    // Escucha los clics en el cuadro
-    userScore.addEventListener('click', () => {
-      if (gameStarted) {
-        score++;
-        userScore.textContent = `User Score: ${score}`;
-      }
-    });
-  }
-});
+    /*Iniciar el temporizador de 10 segundos*/
+
+    timer = setInterval(() => {
+        endGame();
+    }, 5000);
+    }
+
+    function countClick() {
+        clicks++;
+        clicksDisplay.textContent = clicks; 
+    }
+
+    function endGame() {
+        clearInterval(timer);
+        startButton.style.display = 'block';
+        clickHereButton.style.display = 'none';
+        alert(`Juego terminado. Total de clics: ${clicks}`);
+    }
+
+}); 
+
+
