@@ -1,4 +1,4 @@
-/* Llamar al DOM */
+// Llamar al DOM
 document.addEventListener('DOMContentLoaded', function() {
 const startButton = document.querySelector('.start-button');
 const clicksDisplay = document.getElementById('clicksDisplay');
@@ -6,32 +6,77 @@ const usernameInput = document.getElementById('username');
 const gameArea = document.getElementById('gameArea');
 const clickHereButton = document.getElementById('clickButton');
 
-let timer; // Variable para almacenar el temporizador
+// VARIABLE PARA ALMACENAR EL TEMPORIZADOR
+
+let timer; 
 let clicks = 0;
 
 startButton.addEventListener('click', startGame);
 clickHereButton.addEventListener('click', countClick);
 
+// VALIDACIÓN USERNAME
+
+const usernameValidation = function() {
+    const usernameValue = usernameInput.value.trim();
+    if (!usernameValue) {
+        alert("Introduce tu username");
+        return false;
+  }
+    return true;
+}
+
+function moveButton() {
+    const screenWidth = window.innerWidth -150;
+    const screenHeight = window.innerHeight -150;
+    const randomX = Math.floor(Math.random() * screenWidth);
+    const randomY = Math.floor(Math.random() * screenHeight);
+
+    clickButton.style.left = `${randomX}px`;
+    clickButton.style.top = `${randomY}px`;
+
+}
+
+// INICIO DEL JUEGO
 
 function startGame() {
+    const isValidUsername = usernameValidation();
+    if (!isValidUsername) {
+        return;
+    }
     startButton.style.display = 'none';
-    clicksDisplay.style.display = 'block';
+    clicksDisplay.style.display = 'none';
     clickHereButton.style.display = 'block';
     gameArea.style.display = 'block';
     clicks = 0;
     clicksDisplay.textContent = clicks;
 
-    /*Iniciar el temporizador de 10 segundos*/
+    let buttonMovement = setInterval(moveButton, 1500);
+    setTimeout(() => {
+        clearInterval(buttonMovement);
+        endGame();
+    }, 10000);
+
+    
+
+    
+// INICIAR TEMPORIZADOR 10 SEGUNDOS
 
     timer = setInterval(() => {
         endGame();
-    }, 5000);
+
+    }, 10000);
     }
+
+
+// CONTADOR DE CLICKS
 
     function countClick() {
         clicks++;
-        clicksDisplay.textContent = clicks; 
+        clicksDisplay.textContent = clicks;
+        
     }
+
+// FIN DEL JUEGO
 
     function endGame() {
         clearInterval(timer);

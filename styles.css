@@ -7,6 +7,7 @@ body {
     padding: 2rem;
     align-items: center;
     justify-content: center;
+    
 }
 
 .box-name {
@@ -18,6 +19,9 @@ body {
     display: block;
     flex-direction: column; /* Alinea los elementos en columna */
     justify-content: space-around; /* Espacio uniforme entre los elementos */
+    border-radius: 3rem;
+    box-shadow: 10px 10px 10px 10px rgba(2, 10, 11, 5);
+    margin-top: 5rem;
     
 }
 
@@ -40,6 +44,9 @@ h1 {
     height: 20rem;
     width: 10rem;
     text-align: center;
+    border-radius: 3rem;
+    box-shadow: 10px 10px 10px rgba(2, 10, 11, 5);
+    margin-top: 5rem;
     
         
 }
@@ -83,4 +90,13 @@ h1 {
 
 .hide {
     display: none;
+}
+
+#clickButton {
+    position: absolute;
+    cursor: pointer;
+    font-family: Rubik Doodle Shadow;
+    font-size: 2rem;
+    padding: 2rem;
+
 }
