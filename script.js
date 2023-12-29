@@ -85,6 +85,4 @@ function startGame() {
         alert(`Juego terminado. Total de clics: ${clicks}`);
     }
 
-}); 
-
-
+});
