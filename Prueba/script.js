@@ -10,7 +10,18 @@ document.addEventListener('DOMContentLoaded', function() {
     let timer;
   
     startButton.addEventListener('click', startGame);
-    clickButton.addEventListener('click', countClick);
+    clickButton.addEventListener('click', () => {
+      countClick();
+      changeButtonSize();
+    });
+
+    function changeButtonSize() {
+      const currentSize = parseInt(window.getComputedStyle(clickButton).fontSize);
+      const newSize = currentSize + 5;
+      clickButton.style.fontSize = `${newSize}px`;
+
+    }
+
   
     function moveButton() {
       const screenWidth = window.innerWidth - 150; // Considera el tamaño del botón

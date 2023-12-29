@@ -15,7 +15,7 @@
 </head>
 <body>
     <!--<div class="container">!-->
-        <div class="box-name">            
+        <div id="boxName" class="box-name">            
              <h1>Choose your username</h1>
              <div class="user-data">
                 <input type="text" id="username"
@@ -23,17 +23,27 @@
                 <button class="start-button" id="start-button" type="submit">Start</button>  
              </div> 
         </div>
-      <div class="box-score">
-        <h2>User Score</h2>
-      </div>
+            
+        <div id="boxScore" class="box-score">
+            <h2>User Score</h2>
+            <p id="playerResult"></p>
+        </div>
       
 
       <div id="gameArea">
         <span id="clicksDisplay" class="hide"><!--Click Here--></span>
         <button id="clickButton" class="hide">CLICK HERE</button>
       </div>
+
+      <div id="finalScreen" class="pageScore hide">
+        <h2>Your score</h2>
+        <p>Your 10 seconds are done!</p>
+        <p id="recordClicks"></p>
+        <button id="playAgain" class="playButton">Play again</button>
+      </div>
+
       
-      
+
 
       
 
