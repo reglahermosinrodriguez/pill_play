@@ -5,10 +5,12 @@ function guardarInformacionUsuario(nombreUsuario, puntaje) {
 
     // Si ya existe un registro para este usuario, actualizar el puntaje
     if (datosExistente[nombreUsuario]) {
-        datosExistente[nombreUsuario] = puntaje;
+        /*datosExistente[nombreUsuario] = puntaje;*/
+        datosExistente[nombreUsuario].historial.push(puntaje);
     } else {
         // Si no existe un registro para este usuario, crear uno nuevo
-        datosExistente[nombreUsuario] = puntaje;
+        /*datosExistente[nombreUsuario] = puntaje;*/
+        datosExistente[nombreUsuario] = { historial: [puntaje] };
     }
 
     // Guardar los datos actualizados en el localStorage
@@ -107,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
         clicks = 0;
         clicksDisplay.textContent = clicks;
         
+        
     
         let buttonMovement = setInterval(moveButton, 1800);
         setTimeout(() => {
@@ -122,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
         timer = setInterval(() => {
             endGame();
     
-        }, 3000);        
+        }, 3000);    
     }
     
     
@@ -134,6 +137,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         }
     
+// Antes de llamar a actualizarPuntuacionUsuarioEnBoxScore
+const datosLocalStorage = JSON.parse(localStorage.getItem('datosJugadores')) || {};
+console.log('Contenido de localStorage:', datosLocalStorage);
+
+
     // FIN DEL JUEGO Y YOUR SCORE
     
         function endGame() {
@@ -147,17 +155,20 @@ document.addEventListener('DOMContentLoaded', function() {
             /*alert(`Juego terminado. Total de clics: ${clicks}`);*/
 
 // Obtener el nombre del usuario actual y su puntaje
-const nombreUsuario = localStorage.getItem('username');
+const nombreUsuario = usernameInput.value.trim();
+/*const nombreUsuario = localStorage.getItem('username');*/
 const recordClicks = document.getElementById('recordClicks');
 const puntajeUsuario = clicks; // El puntaje del usuario actual
-
-// Mostrar el puntaje del usuario actual en pantalla
 recordClicks.textContent = `Your score is ${puntajeUsuario}`;
 
 // Almacenar o actualizar el puntaje del usuario en localStorage
 guardarInformacionUsuario(nombreUsuario, puntajeUsuario);
-}
 
+
+
+/*actualizarPuntuacionUsuarioEnBoxScore(nombreUsuario, puntajeUsuario);(ESTA SÍ FUNCIONABA)*/
+actualizarPuntuacionUsuarioEnBoxScore();
+}
 
 
 
@@ -166,6 +177,81 @@ guardarInformacionUsuario(nombreUsuario, puntajeUsuario);
             recordClicks.textContent = `Your score is ${clicks}`;
         
        
+    
+    
+
+// PUNTUACIÓN BOX SCORE FUNCIONA Y GUARDADO TODO EN EL LOCALSTORAGE Y EN LA BOX SCORE APARECE SOLO EL USUARIO Y SU HISTORIAL
+function actualizarPuntuacionUsuarioEnBoxScore() {
+    const playerResult = document.getElementById('playerResult');
+
+    // Obtener datos existentes del localStorage
+    const datosExistente = JSON.parse(localStorage.getItem('datosJugadores')) || {};
+
+    // Crear un array de registros de usuarios
+    const registrosUsuarios = [];
+
+    // Iterar sobre los usuarios en los datos existentes
+    for (const nombreUsuario in datosExistente) {
+        if (datosExistente.hasOwnProperty(nombreUsuario)) {
+            // Verificar si hay historial de puntuaciones para el usuario actual
+            const historialPuntuaciones = datosExistente[nombreUsuario]?.historial || [];
+            
+            if (historialPuntuaciones.length > 0) {
+                const puntajeActual = historialPuntuaciones[historialPuntuaciones.length - 1];
+                // Agregar el registro del usuario al array
+                registrosUsuarios.push(`${nombreUsuario}: ${historialPuntuaciones.join(', ')}`);
+            }
+        }
+    }
+
+    // Mostrar todos los registros de usuarios en playerResult
+    playerResult.innerHTML = registrosUsuarios.join('<br>');
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*function actualizarPuntuacionUsuarioEnBoxScore(nombreUsuario) {
+    const playerResult = document.getElementById('playerResult');
+
+    // Obtener datos existentes del localStorage
+    const datosExistente = JSON.parse(localStorage.getItem('datosJugadores')) || {};
+
+    // Verificar si hay datos para el usuario actual
+    if (datosExistente[nombreUsuario]) {
+        const historialPuntuaciones = datosExistente[nombreUsuario].historial;
+
+        // Mostrar el historial de puntuaciones
+        playerResult.textContent = `${nombreUsuario}: ${historialPuntuaciones.join(', ')}`;
+    } else {
+        // Mostrar un mensaje si no hay datos para el usuario actual
+        playerResult.textContent = `${nombreUsuario}: Sin historial de puntuaciones`;
+    }
+}*/
+    
+
+
+
+    // CON ESTA FUNCION: FUNCIONA USUARIO Y SU PUNTAJE
+    /*function actualizarPuntuacionUsuarioEnBoxScore(nombreUsuario, puntaje) {
+        const playerResult = document.getElementById('playerResult');
+        playerResult.textContent = `${nombreUsuario}: ${puntaje}`;
+    }*/
+
+
+
+    
+
+
+
         
 
     // TAMAÑO ORIGINAL CLICK HERE
