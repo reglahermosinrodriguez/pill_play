@@ -72,6 +72,26 @@
         const datosLocalStorage = JSON.parse(localStorage.getItem('datosJugadores')) || {};
         console.log('Contenido de localStorage:', datosLocalStorage);
 
+// CURRENTLY PLAYING
+
+
+function currentlyPlaying() {
+    const currentPlayer = document.getElementById('currentPlayer');
+    const nombreUsuario = usernameInput.value.trim();
+    currentPlayer.innerHTML = `${nombreUsuario} currently playing...`;
+}
+
+
+
+/*function currentlyPlaying() {
+    console.log('Ingresó a currentlyPlaying');
+    if (isPlaying) {
+        const currentPlayer = document.getElementById('currentPlayer');
+        const nombreUsuario = usernameInput.value.trim();
+        currentPlayer.innerHTML = `${nombreUsuario} currently playing...`;
+    }
+}*/
+
 
 // INICIO DEL JUEGO
     
@@ -82,10 +102,13 @@
         }
         // Obtener el nombre del usuario actual
     const nombreUsuario = usernameInput.value.trim();
+    currentlyPlaying();
+    
+    
 
-    // Mostrar "currently playing" en la Box Score
+    /*// Mostrar "currently playing" en la Box Score
     console.log('Iniciando juego para:', nombreUsuario);  // Agregamos esta línea para depurar
-    actualizarInfoUsuarioEnBoxScore(nombreUsuario, 'currently playing...');
+    actualizarInfoUsuarioEnBoxScore(nombreUsuario, 'currently playing...');*/
     // Asegurarse de que playerResult esté visible
     const playerResult = document.getElementById('playerResult');
     playerResult.style.display = 'block'
@@ -129,6 +152,11 @@
 
 // FIN DEL JUEGO Y YOUR SCORE
     
+function stopCurrentlyPlaying() {
+    const currentPlayer = document.getElementById('currentPlayer');
+    currentPlayer.innerHTML = ''; // Vaciamos el contenido para detener la visualización de "currently playing"
+}
+
         function endGame() {
             clearInterval(timer);
             startButton.style.display = 'block';
@@ -137,6 +165,7 @@
             finalScreen.style.display = 'block';
             playAgainButton.style.display = 'block';
             boxName.style.display = 'none';
+            stopCurrentlyPlaying(); --FUNCIONA            
             /*alert(`Juego terminado. Total de clics: ${clicks}`);*/
             console.log('Juego finalizado. Total de clics:', clicks);
             // Obtener el nombre del usuario actual y su puntaje
@@ -155,6 +184,7 @@
 
             /*actualizarPuntuacionUsuarioEnBoxScore(nombreUsuario, puntajeUsuario);(ESTA SÍ FUNCIONABA)*/
             actualizarPuntuacionUsuarioEnBoxScore();
+            
     }
 
 
